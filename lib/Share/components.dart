@@ -103,7 +103,7 @@ Widget TaskListItem(Map model,context,colorIndex) =>Padding(
 
                   fontWeight: FontWeight.bold,
                   fontFamily: "Janna",
-                  color: Colors.black,
+                  color: Colors.white,
 
                 ),
 
@@ -130,10 +130,12 @@ Widget TaskListItem(Map model,context,colorIndex) =>Padding(
               ),
 
               Container(
-
+                padding: EdgeInsets.only(
+                  bottom: 5
+                ),
                 width: 80.0,
 
-                height: 20.0,
+                height: 25.0,
 
                 decoration: BoxDecoration(
 
@@ -157,12 +159,12 @@ Widget TaskListItem(Map model,context,colorIndex) =>Padding(
                     '${model['Statue']}',
 
                     style: TextStyle(
-
+                      
                       color: Colors.white,
                       fontFamily: "Janna",
                       fontSize: 16.0,
-
-
+                      fontWeight: FontWeight.bold
+                      
                     ),
 
                   ),
@@ -215,7 +217,7 @@ Widget TaskListItem(Map model,context,colorIndex) =>Padding(
 
             Icons.archive,
 
-            color: Colors.black45,
+            color: Colors.white70,
 
           ),
 

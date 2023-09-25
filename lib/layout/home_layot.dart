@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:intl/intl.dart';
 import 'package:todo_app/moduls/New_Task.dart';
 import 'package:todo_app/todo_cubit/Cubit.dart';
@@ -59,85 +60,88 @@ class HomeLayout extends StatelessWidget {
                     {
                       keyScaff.currentState?.showBottomSheet(
                               (context) => SingleChildScrollView(
-                            child: Padding(
-                              padding: const EdgeInsets.all(20.0),
-                              child: Form(
-                                key: keyForm,
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children:
-                                  [
-                                    defaultText(
-                                      label: 'Task Title',
-                                      controller: titleController,
-                                      prefix: Icons.title,
-                                      type: TextInputType.text,
-                                      validate: (value)
-                                      {
-                                        if (value!.isEmpty)
+                            child: Container(
+                              color: HexColor('F1EFEF'),
+                              child: Padding(
+                                padding: const EdgeInsets.all(20.0),
+                                child: Form(
+                                  key: keyForm,
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children:
+                                    [
+                                      defaultText(
+                                        label: 'Task Title',
+                                        controller: titleController,
+                                        prefix: Icons.title,
+                                        type: TextInputType.text,
+                                        validate: (value)
                                         {
-                                          return 'Title must not be empty';
-                                        }
-                                        return null;
-                                      },
-                                    ),
-                                    SizedBox(
-                                      height: 15.0,
-                                    ),
-                                    defaultText(
-                                      label: 'Task Time',
-                                      controller: timeController,
-                                      prefix: Icons.watch_later_outlined,
-                                      type: TextInputType.datetime,
-                                      validate: (value)
-                                      {
-                                        if (value!.isEmpty)
+                                          if (value!.isEmpty)
+                                          {
+                                            return 'Title must not be empty';
+                                          }
+                                          return null;
+                                        },
+                                      ),
+                                      SizedBox(
+                                        height: 15.0,
+                                      ),
+                                      defaultText(
+                                        label: 'Task Time',
+                                        controller: timeController,
+                                        prefix: Icons.watch_later_outlined,
+                                        type: TextInputType.datetime,
+                                        validate: (value)
                                         {
-                                          return 'Time must not be empty';
-                                        }
-                                        return null;
-                                      },
-                                      onClick: ()
-                                      {
-                                        showTimePicker(
-                                          context: context,
-                                          initialTime: TimeOfDay.now(),
-                                        ).then((value) {
-                                          print(value!.format(context).toString());
-                                          timeController.text=value!.format(context).toString();
-                                        });
-                                      },
-                                    ),
-                                    SizedBox(
-                                      height: 15.0,
-                                    ),
-                                    defaultText(
-                                      label: 'Task Date',
-                                      controller: dateController,
-                                      prefix: Icons.calendar_today_rounded,
-                                      type: TextInputType.datetime,
-                                      validate: (value)
-                                      {
-                                        if (value!.isEmpty)
+                                          if (value!.isEmpty)
+                                          {
+                                            return 'Time must not be empty';
+                                          }
+                                          return null;
+                                        },
+                                        onClick: ()
                                         {
-                                          return 'Date must not be empty';
-                                        }
-                                        return null;
-                                      },
-                                      onClick: ()
-                                      {
-                                        showDatePicker(
-                                          context: context,
-                                          initialDate: DateTime.now(),
-                                          firstDate: DateTime.now(),
-                                          lastDate:DateTime.parse('2022-09-06'),
-                                        ).then((value) {
-                                          print(DateFormat.yMMMd().format(value!).toString());
-                                          dateController.text=DateFormat.yMMMd().format(value!).toString();
-                                        });
-                                      },
-                                    ),
-                                  ],
+                                          showTimePicker(
+                                            context: context,
+                                            initialTime: TimeOfDay.now(),
+                                          ).then((value) {
+                                            print(value!.format(context).toString());
+                                            timeController.text=value.format(context).toString();
+                                          });
+                                        },
+                                      ),
+                                      SizedBox(
+                                        height: 15.0,
+                                      ),
+                                      defaultText(
+                                        label: 'Task Date',
+                                        controller: dateController,
+                                        prefix: Icons.calendar_today_rounded,
+                                        type: TextInputType.datetime,
+                                        validate: (value)
+                                        {
+                                          if (value!.isEmpty)
+                                          {
+                                            return 'Date must not be empty';
+                                          }
+                                          return null;
+                                        },
+                                        onClick: ()
+                                        {
+                                          showDatePicker(
+                                            context: context,
+                                            initialDate: DateTime.now(),
+                                            firstDate: DateTime.now(),
+                                            lastDate:DateTime.parse('2022-09-06'),
+                                          ).then((value) {
+                                            print(DateFormat.yMMMd().format(value!).toString());
+                                            dateController.text=DateFormat.yMMMd().format(value).toString();
+                                          });
+                                        },
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
@@ -157,6 +161,7 @@ class HomeLayout extends StatelessWidget {
 
            bottomNavigationBar: BottomNavigationBar(
              currentIndex: cubit.currentIndex,
+             type: BottomNavigationBarType.fixed,
              onTap: (index)
              {
                cubit.changeBottomIndex(index: index);
